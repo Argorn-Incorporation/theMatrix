@@ -1,0 +1,233 @@
+ul,ol {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+    color: #517fa4;
+}
+
+a.underline {
+    border-bottom: 3px double;
+}
+
+.pad10 {
+    padding: 10px;
+}
+
+.rfloat {
+    float: right;
+}
+.lfloat {
+    float: left;
+} 
+
+img.has-rotated {
+    transform: rotate(-90deg);
+    margin-top: 50px;
+}
+
+.hide_overflow {
+    overflow: hidden;
+}
+
+h4 {
+    color: #333333;
+    font-size: 20px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0.01rem;
+    line-height: 1.2;
+    margin-top: 0;
+    margin-bottom: 0.625rem;
+    text-transform: none;
+}
+
+.inl_blck{
+	display: inline-block;
+}
+
+.va_top {
+	vertical-align: top;
+}
+
+.blck {
+	display: block;
+}
+
+.bold {
+	font-weight: 600;
+}
+.font12 {
+    font-size: 12px;
+}
+.font14 {
+	font-size: 14px;
+}
+.font15 {
+	font-size: 15px;
+}
+.font16 {
+	font-size: 16px;
+}
+.font17 {
+	font-size: 17px;
+}
+.font18 {
+    font-size: 18px;
+}
+.font19 {
+    font-size: 19px;
+}
+.font20 {
+    font-size: 20px;
+}
+.font30 {
+    font-size: 30px;
+}
+.font70 {
+    font-size: 6vw;
+}
+
+.font40 {
+    font-size: 40px;
+}
+
+.tUpper {
+	text-transform: uppercase;
+}
+
+.color_w {
+	color: #fff;
+}
+
+.button_tr {
+    background: transparent;
+    border: 1px solid ;
+    border-radius: 45%;
+    padding: 10px 7px;
+    font-size: 15px;
+    outline: 0;
+}
+
+.button.color_w {
+    padding: 12px 7px;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-family: lato,sans-serif;
+    font-weight: 400;
+    width: auto;
+    background: linear-gradient(#00bf8f,#27b95c);
+    transition: .5s;
+    display: inline-block;
+}
+
+.lh_default {
+    line-height: 1.5;
+}
+
+
+/*** hr Styles */
+/* Gradient color1 - color2 - color1 */
+
+hr.style-one {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+/* Gradient transparent - color - transparent */
+
+hr.style-two {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+/* Double-color dashed line */
+
+hr.style-three {
+    border: 0;
+    border-bottom: 1px dashed #ccc;
+    background: #999;
+}
+
+/* Single-direction drop shadow */
+
+hr.single-direction-drop-shadow {
+    height: 12px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* Cloud */
+
+hr.cloud {
+    border: 0;
+    height: 0; /* Firefox... */
+    box-shadow: 0 0 10px 1px black;
+}
+hr.straight:after {  /* Not really supposed to work, but does */
+    content: "\00a0";  /* Prevent margin collapse */
+}
+
+/* Inset, by Dan Eden */
+
+hr.inset {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Flaired edges, by Tomas Theunissen */
+
+hr.flaired-edges {
+    overflow: visible; /* For IE */
+    height: 30px;
+    border-style: solid;
+    border-color: #9e0c22;
+    border-width: 1px 0 0 0;
+    border-radius: 20px;
+}
+hr.flaired-edges:before { /* Not really supposed to work, but does */
+    display: block;
+    content: "";
+    height: 30px;
+    margin-top: -31px;
+    border-style: solid;
+    border-color: #9e0c22;
+    border-width: 0 0 1px 0;
+    border-radius: 20px;
+}
+
+/* Glyph, by Harry Roberts */
+
+hr.glyph {
+    overflow: visible; /* For IE */
+    padding: 0;
+    border: none;
+    border-top: medium double #333;
+    color: #333;
+    text-align: center;
+}
+hr.glyph:after {
+    content: "§";
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
+}
+input, textarea, button {
+    max-width: 100%;
+}
+
+.alignL {
+    text-align: left;
+}

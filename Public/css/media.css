@@ -1,0 +1,51 @@
+@media screen and (max-width: 575px) {
+	.banner {
+    	background-size: 100% auto !important;
+    	min-height: 180px;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	nav#navbar ul {
+		display: none;
+		text-align: left;
+	}
+
+	nav#navbar .navLink {
+		display: block;
+	}
+
+	.isMobileCaret {
+		width: 100%;
+		text-align: center;
+		display: block;
+	}
+
+	.isMobileCaret[hidden] {
+		display: block;
+	}
+
+	.menu_toggle {
+		padding: 10px;
+		font-size: 20px;
+		cursor: pointer;
+	}
+
+	.menu_toggle + nav#navbar ul {
+        display:none;
+    }
+
+    header #preNav #logo {
+    	width: 100%;
+    	text-align: center;
+    }
+
+    .panel_main_info {
+    	min-height: auto;
+    }
+
+    header #preNav .container {
+    	margin: 0;
+    	padding: 0;
+	}
+}
