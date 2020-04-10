@@ -1,39 +1,4 @@
-<?php  
-/**
- * 
-class Bootstrap
-{
-	
-	function __construct()
-	{
-		$url = $_GET['url']?? "index";
-		$url = explode("/", rtrim($url,"/"));
-		$urlController = ucwords(trim(strip_tags($url[0])))."Controller";
-		$file = CONTROLLERS.$urlController.".php";
-		$urlController = str_replace("-", "", $urlController);
-		
-		if (file_exists($file)) {
-			require_once $file;
-		}
-		else {
-			require_once CONTROLLERS."errorController.php";
-			$Controller = new errorController();
-			return false;
-		}
-		$Controller = new $urlController;
-
-		for ($i=1; $i < count($url); $i++) { 
-			if (method_exists($Controller, $url[$i])) {
-				$Controller->{$url[$i]}();
-			}
-		}
-	}
-}
-?>
-
 <?php
-
- */
 class Bootstrap {
 
 	private $_url = null;
@@ -54,7 +19,7 @@ class Bootstrap {
 
 		$this->db = new DB();
 		$d = date('Y-m-d H:i:s');
-		$this->db->query("DELETE FROM users WHERE active=0 && timer<=:timer");
+		$this->db->query("DELETE FROM users WHERE active=0 && timer<=:timer && username!='default'");
 		$this->db->bind(":timer", $d);
 		$this->db->execute();	
 		$this->db = null;

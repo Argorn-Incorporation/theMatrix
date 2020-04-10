@@ -23,7 +23,7 @@ class DashboardController extends Controller
 
 		if ($this->view->userdata['stage']==0) {
 			$this->view->userdata['stage_name'] = "Newbie";
-			$this->view->userdata['stage_info'] = $GLOBALS['$stage_info'][0];
+			$this->view->userdata['stage_info'] = $GLOBALS['stage_info'][0];
 			$this->view->userdata['stage_progress'] = [0,0,0,0]; 
 		}
 		else {

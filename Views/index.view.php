@@ -72,7 +72,7 @@
 			<div style="font-size: 40px;" class="heading" id="#about-us">About Us</div>
 			<div class="alignL font16" style="line-height: 1.7">
 				<ul>
-					<li>P2P Recycler is a peer to pee national programme making it possible for thousands of Ghanaians to make enough funds out of their donations to help one anothe, if not to eradicate poverty, to bring financial freedom to all</li>
+					<li><?=APP_NAME?> is a peer to pee national programme making it possible for thousands of Ghanaians to make enough funds out of their donations to help one anothe, if not to eradicate poverty, to bring financial freedom to all</li>
 					<li>
 						Anybody, anywhere in any part of the country ccan join.
 					</li>

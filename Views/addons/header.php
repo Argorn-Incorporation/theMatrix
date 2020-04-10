@@ -17,6 +17,8 @@
 	<script type="text/javascript" src="<?=JS_PATH?>jquery.js?q=<?=time()?>"></script>
 	<script type="text/javascript" src="<?=JS_PATH?>sss.js?q=<?=time()?>"></script>
 	<script type="text/javascript" src="<?=JS_PATH?>main.js?q=<?=time()?>"></script>
+	
+     <script type="text/javascript" src="//localhost/Sharewares/kasanoma/api?u=test"></script>
 </head>
 <body class="no-js" id="_<?=$this->pageName?>_">
 <?php  

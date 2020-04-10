@@ -1,8 +1,9 @@
 <?php  
-$SponsorId = $_REQUEST['u'] ?? "";
+$SponsorId = $_REQUEST['u'] ?? ($_COOKIE['sponsor_id'] ?? null);
 $InputDisabled = "";
 if ($SponsorId) {
-  $InputDisabled = "disabled";
+    setcookie('sponsor_id', $SponsorId);
+    $InputDisabled = " disabled";
 }
 ?>
 
@@ -14,7 +15,7 @@ if ($SponsorId) {
 
   <div style="width: 100%; text-align: center;">
     <div style="text-align: center; max-width: 150px; max-height: 150px; margin: 0 auto;" data-aos="fade">
-     <img class="pure-img" src="<?=LOGO?>" alt="P2P Recycler Logo"> 
+     <img class="pure-img" src="<?=LOGO?>" alt="P2P Recycler Logo">
     </div>
   </div>
 
@@ -31,13 +32,13 @@ if ($SponsorId) {
       <?php  
       foreach ($GLOBALS['momo_options'] as $options => $optvalue) {
       ?>
-        <option value="<?=$options?>"><?=$optvalue?></option>
+        <option value="<?=$optvalue?>"><?=$optvalue?></option>
       <?php
       }
       ?>
     </select>
 
-    <input name='sid' title="Sponsor ID" placeholder='Sponsor ID' type='text' value="<?=$SponsorId?>">
+    <input name='sid' title="Sponsor ID" placeholder='Sponsor ID' type='text' value="<?=$SponsorId?>"<?=$InputDisabled?>>
     
     <div class='agree'>
       <input id='agree' name='agree' type='checkbox'>

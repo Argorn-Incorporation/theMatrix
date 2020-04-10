@@ -199,7 +199,7 @@
                                         <div class="card-body text-white">
                                             <p class="card-text text-light">
                                                 <ul>
-                                                    <?=$GLOBALS['$stage_info'][$this->userdata['stage']]?>
+                                                    <?=$GLOBALS['stage_info'][$this->userdata['stage']]?>
                                                 </ul>
                                             </p>
                                         </div>

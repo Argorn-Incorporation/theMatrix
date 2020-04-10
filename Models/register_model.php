@@ -23,67 +23,77 @@ class Register_Model extends Model
 		$timer = strtotime($timer . "+3hours");
 		$timer = date('Y-m-d H:i:s', $timer);
 		$userid = $this->generateID ?? time();
-
+		$hasErrors = false;
+		Session::init();
 		if (empty($fname)) {
-			echo "Please provide your Full name";
-			exit;
+			Session::set('errMsg','Please provide your Full name');
+			$hasErrors = true;
 		}
-		if (empty($uname)) {
-			echo "Please choose a username";
-			exit;
+		elseif (empty($uname)) {
+			Session::set('errMsg',"Please choose a username");
+			$hasErrors = true;
 		}
-		if (($this->UserExists($uname, 2)['rowCount']) or $uname == "default") {
-			echo "Username ".$uname." already exits.&nbsp;Please choose a different username...";
-			exit;
+		elseif (($this->UserExists($uname, 2)['rowCount']) or $uname == "default") {
+			Session::set('errMsg',"Username ".$uname." already exits.&nbsp;Please choose a different username...");
+			$hasErrors = true;
 		}
-		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			echo "The email you entered is invalid";
-			exit;
+		elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			Session::set('errMsg',"The email you entered is invalid");
+			$hasErrors = true;
 		}
-		if (empty($mobile) or strlen($mobile)>10) {
-			echo "Enter a valid mobile number";
-			exit;
+		elseif (empty($mobile) or strlen($mobile)>10) {
+			Session::set('errMsg',"Enter a valid mobile number");
+			$hasErrors = true;
 		}
-		if (empty($momo_type)) {
-			echo "Select your mobile money operator";
-			exit;
+		elseif (empty($momo_type)) {
+			Session::set('errMsg',"Select your mobile money operator");
+			$hasErrors = true;
 		}
 		
 		$sid = $this->UserExists($sid, 2, 1);
+		$admin = $this->UserExists('default', 2, 1);
 		if (($sid['rowCount']<1)) {
-			echo "Please enter a valid sponsor id";
-			exit;
+			Session::set('errMsg',"Please enter a valid sponsor id");
+            $hasErrors = true;
 		}
-		$sid = ($sid['data']['stage']>0 or $sid['data']['stage_completed']>0) ? $this->SelectRandomSponsor() : $sid['data']['userid'];
+		if ($hasErrors===true) {
+		    header('Location: '.APP_URL.'register');
+        }
+		else {
+            $sid = ($sid['data']['stage'] > 0 or $sid['data']['stage_completed'] > 0) ? $this->SelectRandomSponsor() : $sid['data']['userid'];
+            $admin = $admin['data']['userid'];
 
-		$this->db->beginTransaction();
-			try {
-				$this->db->query('INSERT INTO `users` (`userid`,`fullname`, `username`, `pswd`, `sponsor_id`, `email`, `current_sponsor`, `timer`,`mobile`,`momo_type`,`momo_name`) VALUES (:userid, :fname, :uname, :pswd, :sid, :email, :sid, :timer, :mobile, :momo_type, :fname)'); 
-				$this->db->bind(':userid', $userid);
-				$this->db->bind(':fname', $fname);
-				$this->db->bind(':uname', $uname);
-				$this->db->bind(':pswd', $pswd);
-				$this->db->bind(':sid', $sid);
-				$this->db->bind(':email', $email);
-				$this->db->bind(':timer', $timer);
-				$this->db->bind(':mobile', $mobile);
-				$this->db->bind(':momo_type', $momo_type);
-				$this->db->execute();
-				$this->insertNotification($fname." with user ID ".$userid." is now your downline. Check and upgrade them after you receive their payment.", $sid);
-				$this->RequestUpgrade($userid, $sid);
-				$this->db->endTransaction();
-				Session::init();
-				Session::set('loggedIn', true);
-				Session::set('userid', $uname);
-				Auth::createCookie("userid", $uname);
-				Auth::createCookie("loggedIn", 1);
-				header('location: ../dashboard');
-				echo true;
-				
-			} catch (PDOException $e) {
-				$this->db->cancelTransaction();
-				echo false;
-			}
+            $this->db->beginTransaction();
+            try {
+                $this->db->query('INSERT INTO `users` (`userid`,`fullname`, `username`, `pswd`, `sponsor_id`, `email`, `current_sponsor`, `timer`,`mobile`,`momo_type`,`momo_name`) VALUES (:userid, :fname, :uname, :pswd, :sid, :email, :sid, :timer, :mobile, :momo_type, :fname)');
+                $this->db->bind(':userid', $userid);
+                $this->db->bind(':fname', $fname);
+                $this->db->bind(':uname', $uname);
+                $this->db->bind(':pswd', $pswd);
+                $this->db->bind(':sid', $sid);
+                $this->db->bind(':email', $email);
+                $this->db->bind(':timer', $timer);
+                $this->db->bind(':mobile', $mobile);
+                $this->db->bind(':momo_type', $momo_type);
+                $this->db->execute();
+                $this->insertNotification($fname . " with user ID " . $userid . " is now your downline.", $sid);
+                $this->insertNotification($fname . " with user ID " . $userid . " has joined ".APP_NAME.". Check and upgrade them after you receive their payment.", $admin);
+                $this->RequestUpgrade($userid, $admin);
+                $this->db->endTransaction();
+                Session::init();
+                Session::set('loggedIn', true);
+                Session::set('userid', $uname);
+                Auth::createCookie("userid", $uname);
+                Auth::createCookie("loggedIn", 1);
+                header('location: ../dashboard');
+                echo true;
+
+            } catch (PDOException $e) {
+                $this->db->cancelTransaction();
+                Session::set('errMsg',"An error occurred. " . $e);
+                header('Location: '.APP_URL.'register');
+            }
+        }
 	}
 	
 }
