@@ -154,38 +154,16 @@
                                 <div class="task-progress">
                                     <h3 class="title-3">progress</h3>
                                     <div class="au-skill-container">
+                                        <?php foreach ($this->userdata['stage_progress'] as $key=>$stage_progress) {?>
                                         <div class="au-progress">
-                                            <span class="au-progress__title">Newbie</span>
+                                            <span class="au-progress__title"><?=$key?'Stage '.$key:'Newbie'?></span>
                                             <div class="au-progress__bar">
-                                                <div class="au-progress__inner js-progressbar-simple" role="progressbar" data-transitiongoal="<?=$this->userdata['stage_progress'][0]?>">
+                                                <div class="au-progress__inner js-progressbar-simple" role="progressbar" data-transitiongoal="<?=$stage_progress?>">
                                                     
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="au-progress">
-                                            <span class="au-progress__title">Stage 1</span>
-                                            <div class="au-progress__bar">
-                                                <div class="au-progress__inner js-progressbar-simple" role="progressbar" data-transitiongoal="<?=$this->userdata['stage_progress'][1]?>">
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="au-progress">
-                                            <span class="au-progress__title">Stage 2</span>
-                                            <div class="au-progress__bar">
-                                                <div class="au-progress__inner js-progressbar-simple" role="progressbar" data-transitiongoal="<?=$this->userdata['stage_progress'][2]?>">
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="au-progress">
-                                            <span class="au-progress__title">Stage 3</span>
-                                            <div class="au-progress__bar">
-                                                <div class="au-progress__inner js-progressbar-simple" role="progressbar" data-transitiongoal="<?=$this->userdata['stage_progress'][3]?>">
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <?php } ?>
                                     </div>
                                 </div>
                                 <!-- END TASK PROGRESS-->

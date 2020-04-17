@@ -21,26 +21,26 @@ class DashboardController extends Controller
 
 		$this->view->userdata['timer'] = date('M d, Y h:i:sa', strtotime($this->view->userdata['timer']));
 
+        $this->view->userdata['stage_progress'] = [0,0,0,0,0,0,0,0,0,0];
 		if ($this->view->userdata['stage']==0) {
 			$this->view->userdata['stage_name'] = "Newbie";
 			$this->view->userdata['stage_info'] = $GLOBALS['stage_info'][0];
-			$this->view->userdata['stage_progress'] = [0,0,0,0]; 
 		}
 		else {
 			$this->view->userdata['stage_name'] = "Stage ".$this->view->userdata['stage'];
 			$this->view->userdata['stage_info'] = "";
 
-			if ($this->view->userdata['stage']==1) {
-				$this->view->userdata['stage_progress'] = [100,(($this->view->userdata['stage_downlines'])/($GLOBALS['StageDefaultInfo'][1]))*100,0,0]; 
-			}
-			elseif ($this->view->userdata['stage']==2) {
-				$this->view->userdata['stage_progress'] = [100,100,($this->view->userdata['stage_downlines']/($GLOBALS['StageDefaultInfo'][2]))*100,0]; 
-			}
-			elseif ($this->view->userdata['stage']==2) {
-				$this->view->userdata['stage_progress'] = [100,100,100,($this->view->userdata['stage_downlines']/($GLOBALS['StageDefaultInfo'][3]))*100]; 
-			}
-
 		}
+
+		for ($i=0; $i<10; $i++) {
+            if ($this->view->userdata['stage']==$i) {
+                $this->view->userdata['stage_progress'][$i] = ((double)($this->view->userdata['stage_downlines'])/($GLOBALS['StageDefaultInfo'][$i]))*100;
+                break;
+            }
+            else {
+                $this->view->userdata['stage_progress'][$i] = 100;
+            }
+        }
 
 		$this->view->userdata['upliner_details'] = [];
 
